@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+    <link href="resources/bootstrap.min.css" rel="stylesheet"/>
+    <title>Gestión de Insumos Médicos</title>
+</h:head>
+<body>
+<div class="d-flex justify-content-between align-items-center p-3 border-bottom bg-dark">
+    <div class="logo fs-4 text-white">Desafío 1</div>
+    <a class="btn btn-primary" href="index.xhtml">Menú</a>
+</div>
+
+<div class="container mt-4">
+    <div class="row">
+        <!-- Formulario para agregar un nuevo insumo médico -->
+        <div class="col-md-6 mb-4">
+            <h2 class="mb-3">Agregar Nuevo Insumo Médico</h2>
+            <h:form>
+                <div class="form-group">
+                    <h:outputLabel for="nombre" value="Nombre:" class="form-label"/>
+                    <h:inputText id="nombre" value="#{insumoBean.newInsumo.nombre}" class="form-control" required="true" requiredMessage="El nombre es obligatorio"/>
+                    <h:message for="nombre" class="text-danger"/>
+                </div>
+                <div class="form-group">
+                    <h:outputLabel for="descripcion" value="Descripción:" class="form-label"/>
+                    <h:inputText id="descripcion" value="#{insumoBean.newInsumo.descripcion}" class="form-control" required="true" requiredMessage="La descripción es obligatoria"/>
+                    <h:message for="descripcion" class="text-danger"/>
+                </div>
+                <div class="form-group">
+                    <h:outputLabel for="precio" value="Precio:" class="form-label"/>
+                    <h:inputText id="precio" value="#{insumoBean.newInsumo.precio}" class="form-control" required="true" requiredMessage="El precio es obligatorio">
+                        <f:validateDoubleRange min="0.0"/>
+                    </h:inputText>
+                    <h:message for="precio" class="text-danger"/>
+                </div>
+                <h:commandButton value="Agregar" action="#{insumoBean.createInsumo}" class="btn btn-success mt-3"/>
+            </h:form>
+        </div>
+
+        <!-- Formulario para actualizar un insumo médico existente -->
+        <div class="col-md-6 mb-4">
+            <h2 class="mb-3">Actualizar Insumo Médico</h2>
+            <h:form>
+                <div class="form-group">
+                    <h:outputLabel for="id" value="ID:" class="form-label"/>
+                    <h:inputText id="id" value="#{insumoBean.selectedInsumo.id}" class="form-control"/>
+                </div>
+                <div class="form-group">
+                    <h:outputLabel for="nombre2" value="Nombre:" class="form-label"/>
+                    <h:inputText id="nombre2" value="#{insumoBean.selectedInsumo.nombre}" class="form-control" required="true" requiredMessage="El nombre es obligatorio"/>
+                    <h:message for="nombre2" class="text-danger"/>
+                </div>
+                <div class="form-group">
+                    <h:outputLabel for="descripcion2" value="Descripción:" class="form-label"/>
+                    <h:inputText id="descripcion2" value="#{insumoBean.selectedInsumo.descripcion}" class="form-control" required="true" requiredMessage="La descripción es obligatoria"/>
+                    <h:message for="descripcion2" class="text-danger"/>
+                </div>
+                <div class="form-group">
+                    <h:outputLabel for="precio2" value="Precio:" class="form-label"/>
+                    <h:inputText id="precio2" value="#{insumoBean.selectedInsumo.precio}" class="form-control" required="true" requiredMessage="El precio es obligatorio">
+                        <f:validateDoubleRange min="0.0"/>
+                    </h:inputText>
+                    <h:message for="precio2" class="text-danger"/>
+                </div>
+                <h:commandButton value="Actualizar" action="#{insumoBean.updateInsumo}" class="btn btn-primary mt-3"/>
+            </h:form>
+        </div>
+    </div>
+</div>
+
+<div class="container mt-4">
+    <h2 class="mb-4 text-center">Lista de Insumos Médicos</h2>
+    <h:form id="insumosForm">
+        <h:dataTable value="#{insumoBean.insumosList}" var="insumo" class="table table-bordered table-hover table-striped">
+            <h:column>
+                <f:facet name="header">
+                    <h5>ID</h5>
+                </f:facet>
+                <h:outputText value="#{insumo.id}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h5>Nombre</h5>
+                </f:facet>
+                <h:outputText value="#{insumo.nombre}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h5>Descripción</h5>
+                </f:facet>
+                <h:outputText value="#{insumo.descripcion}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h5>Precio</h5>
+                </f:facet>
+                <h:outputText value="#{insumo.precio}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h5>Acciones</h5>
+                </f:facet>
+                <div class="d-flex">
+                    <h:commandButton value="Eliminar" action="#{insumoBean.deleteInsumo(insumo)}" immediate="true" class="btn btn-danger btn-sm me-2"/>
+                    <h:commandButton value="Seleccionar" action="#{insumoBean.selectInsumo(insumo)}" immediate="true" class="btn btn-primary btn-sm"/>
+                </div>
+            </h:column>
+        </h:dataTable>
+    </h:form>
+</div>
+
+<div class="d-flex justify-content-center align-items-center p-3 border-bottom bg-dark">
+    <div class="text-center text-white">Hecho por [Tu Nombre]</div>
+</div>
+</body>
+</html>

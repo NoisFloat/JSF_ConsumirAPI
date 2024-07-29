@@ -1,0 +1,12 @@
+body {
+    background-image: url('https://i.etsystatic.com/17653747/r/il/315985/3092801421/il_fullxfull.3092801421_1hr5.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+}
+.center-box {
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+}
